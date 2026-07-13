@@ -65,11 +65,12 @@ sends `\n`, not `\r\n`).
 
 ## Supported commands
 
-| Command | Usage           | Reply                                   |
-|---------|-----------------|------------------------------------------|
-| PING    | `PING [msg]`    | `PONG`, or echoes `msg` if given          |
-| SET     | `SET key value` | `OK`                                      |
-| GET     | `GET key`       | the stored value, or nil if not found     |
+| Command | Usage                | Reply                                        |
+|---------|----------------------|-----------------------------------------------|
+| PING    | `PING [msg]`         | `PONG`, or echoes `msg` if given               |
+| SET     | `SET key value`      | `OK`                                           |
+| GET     | `GET key`            | the stored value, or nil if not found          |
+| DEL     | `DEL key [key ...]`  | integer count of keys actually deleted         |
 
 Any other command falls back to replying `OK`.
 
