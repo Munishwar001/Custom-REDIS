@@ -1,15 +1,16 @@
 const { SimpleString, encode } = require("../redis-parser");
 const store = require("../store/store");
 
-function set(connection, command) {
-    if (command.length !== 3) {
+function flushdb(connection, command) {
+    if (command.length !== 1) {
         connection.write(
-            encode(new Error("ERR wrong number of arguments for 'SET' command")),
+            encode(new Error("ERR wrong number of arguments for 'FLUSHDB' command")),
         );
         return;
     }
-    store.set(command[1], command[2]);
+
+    store.clear();
     connection.write(encode(new SimpleString("OK")));
 }
 
-module.exports = set;
+module.exports = flushdb;

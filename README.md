@@ -8,7 +8,7 @@ TCP, without using any Redis libraries.
 
 - Hand-written RESP2 parser (decoder + encoder), handling streamed/fragmented
   TCP data and inline (telnet-style) commands.
-- Command dispatch for `PING`, `SET`, `GET`.
+- Command dispatch for `PING`, `SET`, `GET`, `DEL`, `EXISTS`, `FLUSHDB`.
 - Shared in-memory key-value store.
 - Error logging to a file (`logs/error.log`) in addition to the console.
 
@@ -24,6 +24,9 @@ commands/
   ping.js
   set.js
   get.js
+  del.js
+  exists.js
+  flushdb.js
 store/
   store.js             Shared in-memory Map used by SET/GET
 redis-parser/
@@ -71,6 +74,8 @@ sends `\n`, not `\r\n`).
 | SET     | `SET key value`      | `OK`                                           |
 | GET     | `GET key`            | the stored value, or nil if not found          |
 | DEL     | `DEL key [key ...]`  | integer count of keys actually deleted         |
+| EXISTS  | `EXISTS key [key ...]` | integer count of given keys that exist       |
+| FLUSHDB | `FLUSHDB`            | `OK` — removes all keys from the store         |
 
 Any other command falls back to replying `OK`.
 
